@@ -1,0 +1,66 @@
+﻿@model EverythingPizza.Models.ContactInfo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<body>
+    <h2 class="text-center" style="font-family: Rock Salt, cursive">
+        Edit Contact
+    </h2>
+    <br />
+    <br />
+
+    <div class="row" style="color: #6daf27;
+    font-family: 'Kodchasan', sans-serif; font-size: larger">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <p>
+                    First Name
+                </p>
+                <div class="form-group">
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <p>
+                    Last Name
+                </p>
+                <div class="form-group">
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <p>
+                    Email Addresss
+                </p>
+                <div class="form-group">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <br />
+                <div>
+                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete Contact</a>
+                    <br />
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <!--
+        Need a save button here or in the  form section    
+    -->
+    <div style="color: #6daf27; font-family: 'Kodchasan', sans-serif; font-size: larger">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

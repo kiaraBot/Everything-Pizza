@@ -1,0 +1,110 @@
+﻿@*Name: Jonathan McPeak
+    Program: Everything Pizza
+    Date: 10/24/18*@
+
+@model EverythingPizza.Models.MyPizzaPlaces
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    dt {
+        color: burlywood;
+        font-size: 23px;
+        font-family: 'Kodchasan', sans-serif;
+        text-align: center;
+    }
+
+    dd {
+        color: #ffffff;
+        font-size: 16px;
+        text-align: center;
+    }
+</style>
+
+<h2 style="text-align: center">@Html.DisplayFor(model => model.Name)</h2>
+
+@{ double votes = (double)Model.Votes;
+    double totalVotes = (double)Model.TotalVotes;
+    double rating = Math.Round((votes / totalVotes) * 100); }
+
+<div>
+    <dl>
+        <dt>
+            Address
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Street) @Html.DisplayFor(model => model.Zip)<br /><br />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)<br /><br />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Votes)
+        </dt>
+        @if (rating <= 20)
+        {
+            <dd style="color: #ff0000; font-size: 19px;">
+                @rating%<br /><br />
+            </dd>
+        }
+        else if (rating > 20 && rating <= 40)
+        {
+            <dd style="color: #ff8000; font-size: 19px;">
+                @rating%<br /><br />
+            </dd>
+        }
+        else if (rating > 40 && rating <= 60)
+        {
+            <dd style="color: #ffff00; font-size: 19px;">
+                @rating%<br /><br />
+            </dd>
+        }
+        else if (rating > 60 && rating <= 80)
+        {
+            <dd style="color: #80ff00; font-size: 19px;">
+                @rating%<br /><br />
+            </dd>
+        }
+        else
+        {
+            <dd style="color: #00ff00; font-size: 19px;">
+                @rating%<br /><br />
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Slogan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Slogan)<br /><br />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu)
+        </dt>
+        <dd>
+            @if (Model.Name == "Pizza Hut")
+            {
+                //<a href="/NO">NO</a><br /><br />
+            }
+            else
+            {
+                <a href="@Html.DisplayFor(model => model.Menu)" target="_blank">Check out their menu!</a><br /><br />
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.MyPizzaPlacesId">Edit</a>
+        <text> |</text>
+        <a asp-action="Delete" asp-route-id="@Model.MyPizzaPlacesId">Delete</a>
+        <text> |</text>
+    }
+
+    <a asp-action="Index">Back to List</a>
+</div>

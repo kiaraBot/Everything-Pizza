@@ -1,0 +1,188 @@
+﻿@*Name: Jonathan McPeak
+    Program: Everything Pizza
+    Date: 10/24/18*@
+
+@model DbViewModel
+
+@{
+    ViewData["Title"] = "Find My Pizza";
+}
+
+<style>
+    p {
+        font-size: 16px;
+        color: #ffffff;
+    }
+
+    dd {
+        font-size: 16px;
+        color: #ffffff;
+    }
+</style>
+
+<h2>Find My Pizza!</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        Can't find the place you're looking for? <a asp-action="Create">Add it here!</a>
+    </p>
+}
+
+<div>
+    <input type="number" id="zipCode" onkeyup="zipSearch()" placeholder="Enter Zip Code" title="Type in a zip code"><br /><br />
+
+    <ul id="pizzaList">
+
+        @{ var index = 0;
+            var initialList = Model.MyPizzaPlacesItems; //TRYING TO USE "OrderBy" HERE DOES NOT WORK!! It only works on the next line for some reason.
+            var pizzaList = initialList.OrderBy(p => p.Zip);}
+
+        @foreach (var placeZip in pizzaList)
+        {
+            if (index > 0)
+            {
+                if (pizzaList.ElementAt(index).Zip != pizzaList.ElementAt(index - 1).Zip)
+                {
+                    <li>
+                        <h3>@Html.DisplayFor(modelItem => placeZip.Zip)</h3>
+
+                        @foreach (var placeInfo in pizzaList)
+                        {
+                            if (placeInfo.Zip == placeZip.Zip)
+                            {
+                                double votes = (double)placeInfo.Votes;
+                                double totalVotes = (double)placeInfo.TotalVotes;
+                                double rating = Math.Round((votes / totalVotes) * 100);
+
+                                <dl>
+                                    <dt>
+                                        <a asp-action="Details" asp-route-id="@placeInfo.MyPizzaPlacesId">@Html.DisplayFor(modelItem => placeInfo.Name)</a>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <text> |</text>
+                                            <a asp-action="Edit" asp-route-id="@placeInfo.MyPizzaPlacesId">Edit</a>
+                                            <text> |</text>
+                                            <a asp-action="Delete" asp-route-id="@placeInfo.MyPizzaPlacesId">Delete</a>
+                                        }
+                                    </dt>
+                                    <dd>@Html.DisplayFor(modelItem => placeInfo.Street)</dd>
+                                    @if (rating <= 20)
+                                    {
+                                        <dd style="color: #ff0000">
+                                            Rating: @rating%<br /><br />
+                                        </dd>
+                                    }
+                                    else if (rating > 20 && rating <= 40)
+                                    {
+                                        <dd style="color: #ff8000">
+                                            Rating: @rating%<br /><br />
+                                        </dd>
+                                    }
+                                    else if (rating > 40 && rating <= 60)
+                                    {
+                                        <dd style="color: #ffff00">
+                                            Rating: @rating%<br /><br />
+                                        </dd>
+                                    }
+                                    else if (rating > 60 && rating <= 80)
+                                    {
+                                        <dd style="color: #80ff00">
+                                            Rating: @rating%<br /><br />
+                                        </dd>
+                                    }
+                                    else
+                                    {
+                                        <dd style="color: #00ff00">
+                                            Rating: @rating%<br /><br />
+                                        </dd>
+                                    }
+                                </dl>
+                            }
+                        }
+                    </li>
+                }
+            }
+            else
+            {
+                <li>
+                    <h3>@Html.DisplayFor(modelItem => placeZip.Zip)</h3>
+
+                    @foreach (var placeInfo in pizzaList)
+                    {
+                        if (placeInfo.Zip == placeZip.Zip)
+                        {
+                            double votes = (double)placeInfo.Votes;
+                            double totalVotes = (double)placeInfo.TotalVotes;
+                            double rating = Math.Round((votes / totalVotes) * 100);
+
+                            <dl>
+                                <dt>
+                                    <a asp-action="Details" asp-route-id="@placeInfo.MyPizzaPlacesId">@Html.DisplayFor(modelItem => placeInfo.Name)</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <text> |</text>
+                                        <a asp-action="Edit" asp-route-id="@placeInfo.MyPizzaPlacesId">Edit</a>
+                                        <text> |</text>
+                                        <a asp-action="Delete" asp-route-id="@placeInfo.MyPizzaPlacesId">Delete</a>
+                                    }
+                                </dt>
+                                <dd>@Html.DisplayFor(modelItem => placeInfo.Street)</dd>
+                                @if (rating <= 20)
+                                {
+                                    <dd style="color: #ff0000">
+                                        Rating: @rating%<br /><br />
+                                    </dd>
+                                }
+                                else if (rating > 20 && rating <= 40)
+                                {
+                                    <dd style="color: #ff8000">
+                                        Rating: @rating%<br /><br />
+                                    </dd>
+                                }
+                                else if (rating > 40 && rating <= 60)
+                                {
+                                    <dd style="color: #ffff00">
+                                        Rating: @rating%<br /><br />
+                                    </dd>
+                                }
+                                else if (rating > 60 && rating <= 80)
+                                {
+                                    <dd style="color: #80ff00">
+                                        Rating: @rating%<br /><br />
+                                    </dd>
+                                }
+                                else
+                                {
+                                    <dd style="color: #00ff00">
+                                        Rating: @rating%<br /><br />
+                                    </dd>
+                                }
+                            </dl>
+                        }
+                    }
+                </li>
+            }
+
+            index++;
+        }
+    </ul>
+
+    <script>
+        function zipSearch() {
+            var search = document.getElementById("zipCode");
+            var ul = document.getElementById("pizzaList");
+            var li = ul.getElementsByTagName("li");
+            var h3;
+
+            for (var i = 0; i < li.length; i++) {
+                h3 = li[i].getElementsByTagName("h3")[0];
+                if (h3.innerHTML.indexOf(search.value) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</div>

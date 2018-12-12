@@ -1,0 +1,40 @@
+﻿@page
+<link type="text/css" rel="stylesheet" href="~/css/site.css" />
+<!-- EverythingPizza - Group Project
+     CIS-2284 - November/December 2018
+     Group Members: Alix Field, Sharon Goodrich & Jonathan McPeak
+     Page: Views/Chat/Index   -->
+<!--Sharon Goodrich - sgoodrich1@cnm.edu-->
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            <h2>Welcome to Cheese Please!</h2>
+
+            <br /><br /><br />
+
+            <span class="doWhite">User..........</span><input type="text" id="userInput" />
+            <br /><br />
+            <span class="doWhite">Message...</span><input type="text" id="messageInput" />
+            <br /><br /><br />
+
+            <input type="button" id="sendButton" value="Send Message" />
+            <br /><br />
+            <div class="col-6">&nbsp;</div>
+            <hr />
+            <div class="row">
+                <div class="col-6">&nbsp;</div>
+                <div class="col-6 doWhite">
+                    <ul id="messagesList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+

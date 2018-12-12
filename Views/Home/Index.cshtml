@@ -1,0 +1,94 @@
+﻿<!-- Sharon Goodrich - sgoodrich1@cnm.edu-->
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<body>
+    <h1>Everything Pizza!</h1>
+    <h3 class="top-info"> Find your favorite pizza places, rate them, share your recommendations and find new favorites.</h3>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <!--Photo free from wallpaperscraft.com-->
+                <img src="~/images/wallpapersCraft.jpg" alt="Veggie Pizza" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        Is this your favorite pizza?
+                        <a class="btn btn-danger btn-lg btn-outline-dark" href="MyPizzaBlog" target="_blank">
+                            Tell Us!
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <!--Photo free from Eaterboston.com-->
+                <img src="~/images/eaterBoston.jpg" alt="White with Egg" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        What would you say about this pizza?
+                        <a class="btn btn-danger btn-lg btn-outline-dark" href="MyPizzaBlog" target="_blank">
+                            Tell Us!
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <!--Photo free from tripAdvisor.com-->
+                <img src="~/images/tripAdvisor.jpg" alt="Corn and Stuff" class="img-responsive" />
+                <div class="carousel-caption" role="option">
+                    <p>
+                        Does this pizza look good to you?
+                        <a class="btn btn-danger btn-lg btn-outline-dark" href="MyPizzaBlog" target="_blank">
+                            Tell Us!
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2>How This Works</h2>
+            <ul>
+                <li></li>
+                <li><a href="~/Home/About" target="_blank"><img src="~/images/theflexacademybe.png" alt="How This Works" class="img-responsive" /></a></li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>Find Pizza</h2>
+            <ul class="noStyle">
+                <li><a href="~/FindPizza/Index" target="_blank"><img src="~/images/Search.png" alt="Search for Pizza" class="img-responsive" /></a></li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>Voice Your Opinion</h2>
+            <ul>
+                <li><a href="~/MyPizzaBlog/Index" target="_blank"><img src="~/images/kisspng.png" alt="Voice Your Opinion" class="img-responsive" /></a></li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>Become a Member</h2>
+            <ul>
+                <li><a href="~/Identity/Account/Login" target="_blank"><img src="~/images/vecterstock.jpg" alt="Become a Member" class="img-responsive" /></a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+

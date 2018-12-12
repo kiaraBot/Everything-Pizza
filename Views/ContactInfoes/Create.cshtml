@@ -1,0 +1,90 @@
+﻿<!--
+    Author: Alix Field
+    Contact: afield@cnm.edu
+        The user can create an email message and send it to the admins email service. 
+        User Contact info is saved to the admins database and can be viewed when logged in as admin.
+-->
+@model EverythingPizza.Models.ContactInfo
+@{
+    ViewData["Title"] = "Create";
+}
+
+<head>
+    <title>
+        User Sends Email & Contact Saved to Database
+    </title>
+</head>
+
+<body>
+    <br />
+    <h2 style="color: #6daf27" class="text-center">
+        Do you have questions, concerns, or ideas? Please Contact Us!
+    </h2>
+    <br />
+
+    <div class="row" style="color: #6daf27;
+    font-family: 'Kodchasan', sans-serif; font-size: larger">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <p>
+                    First Name
+                </p>
+                <div class="form-group">
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <p>
+                    Last Name
+                </p>
+                <div class="form-group">
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <p>
+                    Email Addresss
+                </p>
+                <div class="form-group">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <p>
+                    Comments
+                </p>
+                <div class="form-group">
+                    <input asp-for="Comments" class="form-control" />
+                    <span asp-validation-for="Comments" class="text-danger"></span>
+                </div>
+                <br />
+
+                <p style="color: burlywood; font-size: 23px; font-family: 'Kodchasan', sans-serif;" class="text-center">
+                    Please check the box that applies to you.
+                </p>
+                <br>
+                <div>
+                    <div>
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">Ideas?</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Concerns?</label>
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

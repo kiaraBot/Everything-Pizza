@@ -1,0 +1,64 @@
+﻿<!--
+    Author: Alix Field
+    Contact: afield@cnm.edu
+        This page shows the Admin users contacts list. This list of contacts can direct the user to details, editing, and delete pages.
+     At least that is the intent, but because user email message form sends the information off to the email and does not post the data to the database, I cannot show our user information into our database for a contact list. 
+-->
+@model DbViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <title>
+        Everything Pizza's Contact List
+    </title>
+</head>
+
+<body>
+    <h2 class="text-center" style="font-family: Rock Salt, cursive">
+        Our Contacts
+    </h2>
+    <br />
+    <br />
+    <table class="table">
+        <thead  style="color: #6daf27; font-size: 19px; font-family: 'Kodchasan', sans-serif;">
+            <tr>
+                <th >
+                    #
+                </th>
+                <th>
+                    Contact Name
+                </th>
+                <th>
+                    Email Address
+                </th>
+                <td>
+
+                </td>
+            </tr>
+        </thead>
+        <tbody style="color: dimgray; font-size: 18px; font-family: 'Kodchasan', sans-serif;">
+            @foreach (var item in Model.ContactItems)
+            {
+                <tr style="border: hidden">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <br />
+</body>
